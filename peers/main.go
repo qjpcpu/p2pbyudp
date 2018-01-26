@@ -59,18 +59,6 @@ func bidirectionHole(srcAddr *net.UDPAddr, anotherAddr *net.UDPAddr) {
 	if _, err = conn.Write([]byte(HAND_SHAKE_MSG)); err != nil {
 		log.Println("send handshake:", err)
 	}
-	for {
-		data := make([]byte, 1024)
-		n, _, err := conn.ReadFromUDP(data)
-		if err != nil {
-			log.Printf("wait hole ok,err:%v", err)
-		}
-		msg := string(data[:n])
-		if msg == HAND_SHAKE_MSG {
-			log.Println("握手OK...")
-			break
-		}
-	}
 	go func() {
 		for {
 			time.Sleep(10 * time.Second)
