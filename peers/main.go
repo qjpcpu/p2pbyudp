@@ -125,7 +125,7 @@ func sendTcp(ip, port string) {
 func handleConn(c net.Conn) {
 	log.Println("start to read from conn")
 	for {
-		var buf = make([]byte, 10)
+		var buf = make([]byte, 1024)
 		n, err := c.Read(buf)
 		if err != nil {
 			log.Println("conn read error:", err)
