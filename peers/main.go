@@ -70,7 +70,7 @@ func bidirectionHole(srcAddr *net.UDPAddr, anotherAddr *net.UDPAddr) {
 			}
 		}
 	}()
-	loop := 3
+	loop := 2
 	for {
 		data := make([]byte, 1024)
 		n, _, err := conn.ReadFromUDP(data)
