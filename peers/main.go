@@ -11,12 +11,15 @@ import (
 )
 
 var tag string
+var switchTcp bool
 
 const HAND_SHAKE_MSG = "我是打洞消息"
 
 func main() {
 	// 当前进程标记字符串,便于显示
 	tag = os.Args[1]
+	switchTcp = len(os.Args) == 3 && os.Args[2] == "tcp"
+
 	srcAddr := &net.UDPAddr{IP: net.IPv4zero, Port: 9982} // 注意端口必须固定
 	dstAddr := &net.UDPAddr{IP: net.ParseIP("207.148.70.129"), Port: 9981}
 	conn, err := net.DialUDP("udp", srcAddr, dstAddr)
@@ -67,6 +70,7 @@ func bidirectionHole(srcAddr *net.UDPAddr, anotherAddr *net.UDPAddr) {
 			}
 		}
 	}()
+	loop := 3
 	for {
 		data := make([]byte, 1024)
 		n, _, err := conn.ReadFromUDP(data)
@@ -75,5 +79,57 @@ func bidirectionHole(srcAddr *net.UDPAddr, anotherAddr *net.UDPAddr) {
 		} else {
 			log.Printf("收到数据:%s\n", data[:n])
 		}
+		if loop >= 0 {
+			loop -= 1
+		}
+		if loop < 0 && switchTcp {
+			break
+		}
+	}
+	l, err := net.Listen("tcp", fmt.Sprintf(":%d", srcAddr.Port))
+	if err != nil {
+		fmt.Println("listen error:", err)
+		return
+	}
+
+	go sendTcp(srcAddr.IP.String(), fmt.Sprint(srcAddr.Port))
+	for {
+		c, err := l.Accept()
+		if err != nil {
+			fmt.Println("accept error:", err)
+			break
+		}
+		// start a new goroutine to handle
+		// the new connection.
+		go handleConn(c)
+	}
+}
+
+func sendTcp(ip, port string) {
+	//打开连接:
+	conn, err := net.Dial("tcp", ip+":"+port)
+	if err != nil {
+		//由于目标计算机积极拒绝而无法创建连接
+		fmt.Println("Error dialing", err.Error())
+		return // 终止程序
+	}
+
+	for {
+		if _, err = conn.Write([]byte("tcp says: " + tag)); err != nil {
+			log.Println("write tcp fail:", err)
+		}
+		time.Sleep(5 * time.Second)
+	}
+}
+func handleConn(c net.Conn) {
+	for {
+		var buf = make([]byte, 10)
+		log.Println("start to read from conn")
+		n, err := c.Read(buf)
+		if err != nil {
+			log.Println("conn read error:", err)
+			return
+		}
+		log.Printf("read %d bytes, content is %s\n", n, string(buf[:n]))
 	}
 }
