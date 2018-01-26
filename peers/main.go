@@ -20,14 +20,13 @@ func main() {
 	if _, err = conn.Write([]byte("hello, I'm new peer " + srcAddr.String())); err != nil {
 		log.Panic(err)
 	}
-	fmt.Printf("<%s>\n", conn.RemoteAddr())
 	data := make([]byte, 1024)
 	n, remoteAddr, err := conn.ReadFromUDP(data)
 	if err != nil {
 		fmt.Printf("error during read: %s", err)
 	}
 	conn.Close()
-	fmt.Printf("<%s> %s\n", remoteAddr, data[:n])
+	fmt.Printf("local:%s server:%s another:%s\n", srcAddr, remoteAddr, data[:n])
 	anotherPeer := parseAddr(string(data[:n]))
 	log.Printf("get another peer:%s", anotherPeer.String())
 
