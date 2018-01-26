@@ -4,12 +4,14 @@ import (
 	"fmt"
 	"log"
 	"net"
+	"os"
 	"strconv"
 	"strings"
 	"time"
 )
 
 func main() {
+	tag := os.Args[1]
 	sip := net.ParseIP("207.148.70.129")
 	srcAddr := &net.UDPAddr{IP: net.IPv4zero, Port: 9982}
 	dstAddr := &net.UDPAddr{IP: sip, Port: 9981}
@@ -45,7 +47,7 @@ func main() {
 	go func() {
 		for {
 			time.Sleep(1 * time.Second)
-			if _, err = conn.Write([]byte("from " + srcAddr.String())); err != nil {
+			if _, err = conn.Write([]byte("from [" + srcAddr.String() + ":" + tag + "]")); err != nil {
 				log.Println("send msg ", err)
 			} else {
 				log.Println("send ok")
@@ -56,9 +58,9 @@ func main() {
 		data = make([]byte, 1024)
 		n, remoteAddr, err = conn.ReadFromUDP(data)
 		if err != nil {
-			fmt.Printf("error during read: %s", err)
+			log.Printf("error during read: %s\n", err)
 		}
-		fmt.Printf("<%s> %s\n", remoteAddr, data[:n])
+		log.Printf("<%s> %s\n", remoteAddr, data[:n])
 	}
 }
 
