@@ -38,19 +38,17 @@ func main() {
 	}
 	defer conn.Close()
 
-	if _, err = conn.Write([]byte("handshake from:" + srcAddr.String())); err != nil {
+	if _, err = conn.Write([]byte("handshake from:" + tag)); err != nil {
 		log.Println("send handshake:", err)
 	} else {
-		log.Println("send ok")
+		log.Println("send handshake ok")
 	}
 
 	go func() {
 		for {
-			time.Sleep(1 * time.Second)
-			if _, err = conn.Write([]byte("from [" + srcAddr.String() + ":" + tag + "]")); err != nil {
-				log.Println("send msg ", err)
-			} else {
-				log.Println("send ok")
+			time.Sleep(10 * time.Second)
+			if _, err = conn.Write([]byte("from [" + tag + "]")); err != nil {
+				log.Println("send msg fail", err)
 			}
 		}
 	}()
