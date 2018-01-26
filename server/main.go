@@ -27,7 +27,7 @@ func main() {
 			log.Printf("got 2 peers, start p2p test:%+v", peers)
 			listener.WriteToUDP([]byte(peers[0].String()), &peers[1])
 			listener.WriteToUDP([]byte(peers[1].String()), &peers[0])
-			time.Sleep(time.Second * 1)
+			time.Sleep(time.Second * 8)
 			log.Println("server exit.")
 			return
 		}
