@@ -11,7 +11,7 @@ import (
 
 func main() {
 	sip := net.ParseIP("207.148.70.129")
-	srcAddr := &net.UDPAddr{IP: net.IPv4zero, Port: 0}
+	srcAddr := &net.UDPAddr{IP: net.IPv4zero, Port: 9982}
 	dstAddr := &net.UDPAddr{IP: sip, Port: 9981}
 	conn, err := net.DialUDP("udp", srcAddr, dstAddr)
 	if err != nil {
