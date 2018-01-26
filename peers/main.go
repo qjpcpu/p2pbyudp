@@ -72,7 +72,8 @@ func bidirectionHole(srcAddr *net.UDPAddr, anotherAddr *net.UDPAddr) {
 		n, _, err := conn.ReadFromUDP(data)
 		if err != nil {
 			log.Printf("error during read: %s\n", err)
+		} else {
+			log.Printf("收到数据:%s\n", data[:n])
 		}
-		log.Printf("收到数据:%s\n", data[:n])
 	}
 }
