@@ -63,7 +63,7 @@ func bidirectionHole(srcAddr *net.UDPAddr, anotherAddr *net.UDPAddr) {
 		log.Println("send handshake:", err)
 	}
 	go func() {
-		for {
+		for i := 0; i < 3; i++ {
 			time.Sleep(10 * time.Second)
 			if _, err = conn.Write([]byte("from [" + tag + "]")); err != nil {
 				log.Println("send msg fail", err)
@@ -86,13 +86,14 @@ func bidirectionHole(srcAddr *net.UDPAddr, anotherAddr *net.UDPAddr) {
 			break
 		}
 	}
+	log.Println("TCP.....")
 	l, err := net.Listen("tcp", fmt.Sprintf(":%d", srcAddr.Port))
 	if err != nil {
 		fmt.Println("listen error:", err)
 		return
 	}
 
-	go sendTcp(srcAddr.IP.String(), fmt.Sprint(srcAddr.Port))
+	go sendTcp(anotherAddr.IP.String(), fmt.Sprint(anotherAddr.Port))
 	for {
 		c, err := l.Accept()
 		if err != nil {
