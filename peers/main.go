@@ -116,16 +116,16 @@ func sendTcp(ip, port string) {
 	}
 
 	for {
-		if _, err = conn.Write([]byte("tcp says: " + tag)); err != nil {
+		if _, err = conn.Write([]byte(fmt.Sprintf("FROM %s %v", tag, time.Now().Nanosecond()))); err != nil {
 			log.Println("write tcp fail:", err)
 		}
 		time.Sleep(5 * time.Second)
 	}
 }
 func handleConn(c net.Conn) {
+	log.Println("start to read from conn")
 	for {
 		var buf = make([]byte, 10)
-		log.Println("start to read from conn")
 		n, err := c.Read(buf)
 		if err != nil {
 			log.Println("conn read error:", err)
