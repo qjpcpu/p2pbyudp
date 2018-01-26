@@ -25,7 +25,7 @@ func main() {
 		peers = append(peers, *remoteAddr)
 		if len(peers) == 2 {
 
-			log.Printf("进行双向向打洞,建立 %s <--> %s 的连接\n", peers[0].String(), peers[1].String())
+			log.Printf("进行UDP打洞,建立 %s <--> %s 的连接\n", peers[0].String(), peers[1].String())
 			listener.WriteToUDP([]byte(peers[1].String()), &peers[0])
 			listener.WriteToUDP([]byte(peers[0].String()), &peers[1])
 			time.Sleep(time.Second * 8)
