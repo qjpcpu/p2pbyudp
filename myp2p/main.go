@@ -15,6 +15,8 @@ const messageId = 0
 
 type Message string
 
+var server *p2p.Server
+
 func MyProtocol() p2p.Protocol {
 	return p2p.Protocol{
 		Name:    "MyProtocol",
@@ -26,7 +28,6 @@ func MyProtocol() p2p.Protocol {
 
 func main() {
 	nodekey, _ := crypto.GenerateKey()
-	//120.27.209.161
 	srv := p2p.Server{
 		Config: p2p.Config{
 			MaxPeers:   10,
@@ -34,16 +35,17 @@ func main() {
 			Name:       "my node name",
 			ListenAddr: ":30300",
 			Protocols:  []p2p.Protocol{MyProtocol()},
-			// BootstrapNodes: []*discover.Node{
-			// 	&discover.Node{
-			// 		IP:  net.ParseIP("120.27.209.161"),
-			// 		UDP: 30300,
-			// 		TCP: 30300,
-			// 	},
-			// },
+			BootstrapNodes: []*discover.Node{
+				&discover.Node{
+					IP:  net.ParseIP("120.27.209.161"),
+					UDP: 30300,
+					TCP: 30300,
+					ID:  discover.MustHexID("6dc090ed5c0472ca71feff2ae7242d5cc6aaf16de8a24bef3827666c3e6ba5c39665d51824b06554a6ef4d4a13e3bd37423d92b24e432785d4bb35568733cff4"),
+				},
+			},
 		},
 	}
-
+	server = &srv
 	if err := srv.Start(); err != nil {
 		fmt.Println(err)
 		os.Exit(1)
@@ -53,7 +55,7 @@ func main() {
 }
 
 func msgHandler(peer *p2p.Peer, ws p2p.MsgReadWriter) error {
-	fmt.Println("in..")
+	fmt.Println(peer, " in,total peers:", server.PeerCount())
 	for {
 		msg, err := ws.ReadMsg()
 		if err != nil {
