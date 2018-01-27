@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/ethereum/go-ethereum/p2p"
+	"github.com/ethereum/go-ethereum/p2p/discover"
 	"log"
 	"net"
 	"os"
@@ -25,6 +26,7 @@ func MyProtocol() p2p.Protocol {
 
 func main() {
 	nodekey, _ := crypto.GenerateKey()
+	//120.27.209.161
 	srv := p2p.Server{
 		Config: p2p.Config{
 			MaxPeers:   10,
@@ -32,6 +34,13 @@ func main() {
 			Name:       "my node name",
 			ListenAddr: ":30300",
 			Protocols:  []p2p.Protocol{MyProtocol()},
+			// BootstrapNodes: []*discover.Node{
+			// 	&discover.Node{
+			// 		IP:  net.ParseIP("120.27.209.161"),
+			// 		UDP: 30300,
+			// 		TCP: 30300,
+			// 	},
+			// },
 		},
 	}
 
@@ -39,7 +48,7 @@ func main() {
 		fmt.Println(err)
 		os.Exit(1)
 	}
-	fmt.Println("started..", srv.Peers())
+	fmt.Println("started..", srv.NodeInfo())
 	select {}
 }
 
