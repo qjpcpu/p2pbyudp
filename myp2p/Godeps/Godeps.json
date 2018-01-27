@@ -1,0 +1,111 @@
+{
+	"ImportPath": "p2pbyudp/myp2p",
+	"GoVersion": "go1.9.2",
+	"Deps": [
+		{
+			"ImportPath": "github.com/ethereum/go-ethereum/common",
+			"Comment": "v1.7.3-181-g3711140",
+			"Rev": "371114054e7a890d93492e2376e624c63cb712ae"
+		},
+		{
+			"ImportPath": "github.com/ethereum/go-ethereum/crypto",
+			"Comment": "v1.7.3-181-g3711140",
+			"Rev": "371114054e7a890d93492e2376e624c63cb712ae"
+		},
+		{
+			"ImportPath": "github.com/ethereum/go-ethereum/event",
+			"Comment": "v1.7.3-181-g3711140",
+			"Rev": "371114054e7a890d93492e2376e624c63cb712ae"
+		},
+		{
+			"ImportPath": "github.com/ethereum/go-ethereum/log",
+			"Comment": "v1.7.3-181-g3711140",
+			"Rev": "371114054e7a890d93492e2376e624c63cb712ae"
+		},
+		{
+			"ImportPath": "github.com/ethereum/go-ethereum/metrics",
+			"Comment": "v1.7.3-181-g3711140",
+			"Rev": "371114054e7a890d93492e2376e624c63cb712ae"
+		},
+		{
+			"ImportPath": "github.com/ethereum/go-ethereum/p2p",
+			"Comment": "v1.7.3-181-g3711140",
+			"Rev": "371114054e7a890d93492e2376e624c63cb712ae"
+		},
+		{
+			"ImportPath": "github.com/ethereum/go-ethereum/rlp",
+			"Comment": "v1.7.3-181-g3711140",
+			"Rev": "371114054e7a890d93492e2376e624c63cb712ae"
+		},
+		{
+			"ImportPath": "github.com/ethereum/go-ethereum/vendor/github.com/aristanetworks/goarista/monotime",
+			"Comment": "v1.7.3-181-g3711140",
+			"Rev": "371114054e7a890d93492e2376e624c63cb712ae"
+		},
+		{
+			"ImportPath": "github.com/ethereum/go-ethereum/vendor/github.com/go-stack/stack",
+			"Comment": "v1.7.3-181-g3711140",
+			"Rev": "371114054e7a890d93492e2376e624c63cb712ae"
+		},
+		{
+			"ImportPath": "github.com/ethereum/go-ethereum/vendor/github.com/golang/snappy",
+			"Comment": "v1.7.3-181-g3711140",
+			"Rev": "371114054e7a890d93492e2376e624c63cb712ae"
+		},
+		{
+			"ImportPath": "github.com/ethereum/go-ethereum/vendor/github.com/huin/goupnp",
+			"Comment": "v1.7.3-181-g3711140",
+			"Rev": "371114054e7a890d93492e2376e624c63cb712ae"
+		},
+		{
+			"ImportPath": "github.com/ethereum/go-ethereum/vendor/github.com/jackpal/go-nat-pmp",
+			"Comment": "v1.7.3-181-g3711140",
+			"Rev": "371114054e7a890d93492e2376e624c63cb712ae"
+		},
+		{
+			"ImportPath": "github.com/ethereum/go-ethereum/vendor/github.com/rcrowley/go-metrics",
+			"Comment": "v1.7.3-181-g3711140",
+			"Rev": "371114054e7a890d93492e2376e624c63cb712ae"
+		},
+		{
+			"ImportPath": "github.com/ethereum/go-ethereum/vendor/github.com/syndtr/goleveldb/leveldb",
+			"Comment": "v1.7.3-181-g3711140",
+			"Rev": "371114054e7a890d93492e2376e624c63cb712ae"
+		},
+		{
+			"ImportPath": "github.com/ethereum/go-ethereum/vendor/golang.org/x/net/html",
+			"Comment": "v1.7.3-181-g3711140",
+			"Rev": "371114054e7a890d93492e2376e624c63cb712ae"
+		},
+		{
+			"ImportPath": "github.com/ethereum/go-ethereum/vendor/golang.org/x/text/encoding",
+			"Comment": "v1.7.3-181-g3711140",
+			"Rev": "371114054e7a890d93492e2376e624c63cb712ae"
+		},
+		{
+			"ImportPath": "github.com/ethereum/go-ethereum/vendor/golang.org/x/text/internal/tag",
+			"Comment": "v1.7.3-181-g3711140",
+			"Rev": "371114054e7a890d93492e2376e624c63cb712ae"
+		},
+		{
+			"ImportPath": "github.com/ethereum/go-ethereum/vendor/golang.org/x/text/internal/utf8internal",
+			"Comment": "v1.7.3-181-g3711140",
+			"Rev": "371114054e7a890d93492e2376e624c63cb712ae"
+		},
+		{
+			"ImportPath": "github.com/ethereum/go-ethereum/vendor/golang.org/x/text/language",
+			"Comment": "v1.7.3-181-g3711140",
+			"Rev": "371114054e7a890d93492e2376e624c63cb712ae"
+		},
+		{
+			"ImportPath": "github.com/ethereum/go-ethereum/vendor/golang.org/x/text/runes",
+			"Comment": "v1.7.3-181-g3711140",
+			"Rev": "371114054e7a890d93492e2376e624c63cb712ae"
+		},
+		{
+			"ImportPath": "github.com/ethereum/go-ethereum/vendor/golang.org/x/text/transform",
+			"Comment": "v1.7.3-181-g3711140",
+			"Rev": "371114054e7a890d93492e2376e624c63cb712ae"
+		}
+	]
+}
