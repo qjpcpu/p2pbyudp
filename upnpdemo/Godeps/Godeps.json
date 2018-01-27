@@ -1,0 +1,10 @@
+{
+	"ImportPath": "p2pbyudp/upnpdemo",
+	"GoVersion": "go1.9.2",
+	"Deps": [
+		{
+			"ImportPath": "github.com/prestonTao/upnp",
+			"Rev": "f4370df5e1093d8987dfdb55a5d8fa23d72a26a6"
+		}
+	]
+}
