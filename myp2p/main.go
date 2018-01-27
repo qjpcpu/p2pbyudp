@@ -40,7 +40,7 @@ func main() {
 					IP:  net.ParseIP("120.27.209.161"),
 					UDP: 30300,
 					TCP: 30300,
-					ID:  discover.MustHexID("6dc090ed5c0472ca71feff2ae7242d5cc6aaf16de8a24bef3827666c3e6ba5c39665d51824b06554a6ef4d4a13e3bd37423d92b24e432785d4bb35568733cff4"),
+					ID:  discover.MustHexID("4a140114efb9f4e74ee3cbbc94e8d7935f832a7434acf02ec9b1835e35f72b00be378a309736ae83ed01692f0b158b1de9462f04c8f4b686b4507ca10b3887e6"),
 				},
 			},
 		},
@@ -56,13 +56,14 @@ func main() {
 
 func msgHandler(peer *p2p.Peer, ws p2p.MsgReadWriter) error {
 	fmt.Println(peer, " in,total peers:", server.PeerCount())
+	fmt.Println(p2p.SendItems(ws, messageId, peer.String()))
 	for {
 		msg, err := ws.ReadMsg()
 		if err != nil {
 			return err
 		}
 
-		var myMessage Message
+		var myMessage [1]Message
 		err = msg.Decode(&myMessage)
 		if err != nil {
 			// handle decode error
@@ -70,7 +71,7 @@ func msgHandler(peer *p2p.Peer, ws p2p.MsgReadWriter) error {
 		}
 
 		fmt.Println("code:", msg.Code, "receiver at:", msg.ReceivedAt, "msg:", myMessage)
-		switch myMessage {
+		switch myMessage[0] {
 		case "foo":
 			err := p2p.SendItems(ws, messageId, "bar")
 			if err != nil {
